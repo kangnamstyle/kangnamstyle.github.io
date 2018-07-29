@@ -67,31 +67,65 @@
 			.attr("width", width + margin.left + margin.right)
 			.attr("height", (height + margin.top + margin.bottom));
         
-        var regions = ["EastAsiaPacific",
-                        "EuropeCentralAsia",
-                        "LatinAmericaCaribbean",
-                        "MiddleEastNorthAfrica0",
-                        "NorthAmerica",
-                        "SouthAsia",
-                        "SubSaharanAfrica"],
-            charts = [];
+        var g = svg.append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+        var path = g.append("path")
+        .attr("class", "chart-area");
+
+        var xAxisG = g.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + innerHeight + ")")
+        var xAxisLabel = xAxisG.append("text")
+        .style("text-anchor", "middle")
+        .attr("transform", "translate(" + (innerWidth / 2) + "," + xAxisLabelOffset + ")")
+        .attr("class", "label")
+        .text(xAxisLabelText);
+
+        var yAxisG = g.append("g")
+        .attr("class", "y axis");
+        var yAxisLabel = yAxisG.append("text")
+        .style("text-anchor", "middle")
+        .attr("transform", "translate(-" + yAxisLabelOffset + "," + (innerHeight / 2) + ") rotate(-90)")
+        .attr("class", "label")
+        .text(yAxisLabelText);
+
+        var xScale = d3.time.scale().range([0, innerWidth]);
+        var yScale = d3.scale.linear().range([innerHeight, 0]);
+
         
-        console.log(regions)
-        maxDataPoint = 1135598208
-        for (var i = 0; i < regions.length; i++)
-        {
-            charts.push(new Chart({
-                data: internetUsers.EastAsiaPacific.slice(),
-                id: i,
-                name: regions[i],
-                width: width,
-                height: height * (1 / regions.length),
-                maxDataPoint: maxDataPoint,
-                svg: svg,
-                margin: margin,
-                showBottomAxis: (i == regions.length - 1)
-            }))
-        }
+
+    //   var path = g.append("path")
+    //     .attr("class", "chart-area")
+    //     var regions = ["EastAsiaPacific",
+    //                     "EuropeCentralAsia",
+    //                     "LatinAmericaCaribbean",
+    //                     "MiddleEastNorthAfrica0",
+    //                     "NorthAmerica",
+    //                     "SouthAsia",
+    //                     "SubSaharanAfrica"],
+    //         charts = [];
+        
+    //     console.log(regions)
+    //     maxDataPoint = 1135598208
+        // for (var i = 0; i < regions.length; i++)
+        // {
+        //     charts.push(new Chart({
+        //         data: internetUsers[0].slice(),
+        //         id: i,
+        //         name: regions[i],
+        //         width: width,
+        //         height: height * (1 / regions.length),
+        //         maxDataPoint: maxDataPoint,
+        //         svg: svg,
+        //         margin: margin,
+        //         showBottomAxis: (i == regions.length - 1)
+        //     }))
+        // }
+        var area = d3.area()
+            .x(function(d) { return x(d.year); })
+            .y1(function(d) { return y(d.users); })
+            .y0(y(0));
+        
 
     }    
         
