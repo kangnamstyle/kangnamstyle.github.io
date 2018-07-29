@@ -18,12 +18,10 @@
 
     d3.csv("/data/internetusers.csv", function(d) {
         return {
-            region: d.region,
-            year: d.year,
-            numOfUsers: d.users
-        };
-    }, function(data) {
-        console.log(data[0]);
+            console.log(d[i].region);
+            console.log(d[i].year);
+            console.log(d[i].users);
+        }
     });
 </script>
 
