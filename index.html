@@ -18,16 +18,17 @@
 
     d3.csv("/data/internetusers.csv", function(d) {
         var internetUsers = {};
+        console.log(d.length)
         for (var i = 0; i < d.length; i++) {
-            var category = d[i].region;
-            if (!internetUsers[category]) {
-                internetUsers[category] = [];
-            }
+            // var category = d[i].region;
+            // if (!internetUsers[category]) {
+            //     internetUsers[category] = [];
+            // }
 
-            internetUsers[category].push({
-                key: d[i].year,
-                value: d[i].users
-            })
+            // internetUsers[category].push({
+            //     key: d[i].year,
+            //     value: d[i].users
+            // })
         }
         console.log(internetUsers)
     });
