@@ -1,16 +1,13 @@
 
 <!DOCTYPE html>
-
-<script src="https://d3js.org/d3.v4.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-
 <html>
-
+<head>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+</head>
 <body>
-    <div id="svg-container">
-    <svg id="viz" width="720" height="405"></svg>
-    </div>
-
+	<div id="chart-container">
+		<h1>Internet Users Over the Years</h1>
+	</div>
 <script>
 
     var width = 720;
@@ -55,6 +52,19 @@
         }
         
         console.log(internetUsers)
+
+        var margin = {top: 10, right: 40, bottom: 150, left: 60},
+	            width = 940 - margin.left - margin.right,
+	            height = 500 - margin.top - margin.bottom,
+	            contextHeight = 50;
+	            contextWidth = width * .5;
+        
+        var svg = d3.select("#chart-container")
+			.append("svg")
+			.attr("width", width + margin.left + margin.right)
+			.attr("height", (height + margin.top + margin.bottom));
+        
+        
     });
 </script>
 
