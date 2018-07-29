@@ -17,10 +17,14 @@
     var height = 405;
 
     d3.csv("/data/internetusers.csv", function(d) {
+        var map = {};
         for (var i = 0; i < d.length; i++) {
-            console.log(d[i].region);
-            console.log(d[i].year);
-            console.log(d[i].users);
+            var category = d[i].region;
+            // console.log(d[i].region);
+            if (!map[category]) {
+                map[category] = {};
+            }
+            map[category].d[i].year = d[i].users;
         }
     });
 </script>
