@@ -23,12 +23,10 @@
             if (!internetUsers[category]) {
                 internetUsers[category] = [];
             }
-            var year = d[i].year;
-            var users = d[i].users;
 
             internetUsers[category].push({
-                key: year,
-                value: users
+                key: d[i].year,
+                value: d[i].users
             })
         }
         for (var region in internetUsers) {
