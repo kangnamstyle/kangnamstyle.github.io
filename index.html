@@ -25,7 +25,8 @@
             }
             var year = d[i].year;
             var users = d[i].users;
-            map[category][year] = users;
+            var tempcategory = map[category]
+            tempcategory[year] = users;
         }
         for (var region in map) {
             for (var yearkey in region) {
