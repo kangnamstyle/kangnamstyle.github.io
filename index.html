@@ -17,16 +17,16 @@
     var height = 405;
 
     d3.csv("/data/internetusers.csv", function(d) {
-        var map = {};
+        var internetUsers = {};
         for (var i = 0; i < d.length; i++) {
             var category = d[i].region;
-            if (!map[category]) {
-                map[category] = {};
+            if (!internetUsers[category]) {
+                internetUsers[category] = {};
             }
             var year = d[i].year;
             var users = d[i].users;
-            var tempcategory = map[category]
-            tempcategory[year] = users;
+
+            internetUsers[category].append(year, users);
         }
         for (var region in map) {
             for (var yearkey in region) {
