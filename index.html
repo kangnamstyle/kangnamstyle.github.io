@@ -20,22 +20,22 @@
         var map = {};
         for (var i = 0; i < d.length; i++) {
             var category = d[i].region;
-            // console.log(d[i].region);
             if (!map[category]) {
                 map[category] = {};
             }
             var year = d[i].year;
             // map[category][year] = d[i].users;
+            console.log(year)
             map.push({
                 key: d[i].year,
                 value: d[i].users
             })
         }
-        for (var key in map) {
-            for (var yearkey in key) {
-                console.log(key, yearkey, key[yearkey]);
-            }
-        }
+        // for (var key in map) {
+        //     for (var yearkey in key) {
+        //         console.log(key, yearkey, key[yearkey]);
+        //     }
+        // }
     });
 </script>
 
