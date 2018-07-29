@@ -18,7 +18,7 @@
 
     d3.csv("/data/internetusers.csv", function(d) {
         return {
-            region: d.continent,
+            region: d.region,
             year: d.year,
             numOfUsers: d.users
         };
