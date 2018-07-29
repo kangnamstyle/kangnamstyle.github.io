@@ -27,7 +27,11 @@
             var year = d[i].year;
             map[category].year = d[i].users;
         }
-        console.log(map);
+        for (var key in map) {
+            for (var yearkey in key) {
+                console.log(key, yearkey, key[yearkey]);
+            }
+        }
     });
 </script>
 
