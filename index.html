@@ -21,12 +21,15 @@
         for (var i = 0; i < d.length; i++) {
             var category = d[i].region;
             if (!internetUsers[category]) {
-                internetUsers[category] = {};
+                internetUsers[category] = [];
             }
             var year = d[i].year;
             var users = d[i].users;
 
-            internetUsers[category][year] = users
+            internetUsers[category].push({
+                key: year,
+                value: users
+            })
         }
         for (var region in internetUsers) {
             for (var yearkey in region) {
