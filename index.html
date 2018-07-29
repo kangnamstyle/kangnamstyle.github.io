@@ -24,11 +24,12 @@
                 map[category] = {};
             }
             var year = d[i].year;
+            var users = d[i].users;
             // map[category][year] = d[i].users;
             console.log(year);
             map.push({
-                key: d[i].year,
-                value: d[i].users
+                key: year,
+                value: users
             });
         }
         // for (var key in map) {
