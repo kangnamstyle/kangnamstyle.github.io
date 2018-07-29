@@ -77,7 +77,21 @@
             charts = [];
         
         console.log(regions)
-        
+        maxDataPoint = 1135598208
+        for (var i = 0; i < regions.length; i++)
+        {
+            charts.push(new Chart({
+                data: internetUsers.EastAsiaPacific.slice(),
+                id: i,
+                name: regions[i],
+                width: width,
+                height: height * (1 / regions.length),
+                maxDataPoint: maxDataPoint,
+                svg: svg,
+                margin: margin,
+                showBottomAxis: (i == regions.length - 1)
+            }))
+        }
 
     }    
         
