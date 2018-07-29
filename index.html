@@ -28,9 +28,9 @@
 
             internetUsers[category].append(year, users);
         }
-        for (var region in map) {
+        for (var region in internetUsers) {
             for (var yearkey in region) {
-                console.log(yearkey, region[yearkey]);
+                console.log(region, yearkey, region[yearkey]);
             }
         }
     });
