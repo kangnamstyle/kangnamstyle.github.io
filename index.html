@@ -24,8 +24,10 @@
             if (!map[category]) {
                 map[category] = {};
             }
-            map[category].d[i].year = d[i].users;
+            var year = d[i].year;
+            map[category].year = d[i].users;
         }
+        console.log(map);
     });
 </script>
 
