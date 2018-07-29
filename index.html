@@ -13,7 +13,10 @@
     var width = 720;
     var height = 405;
 
-    d3.csv("/data/internetusers.csv", function(d) {
+    // d3.csv("/data/internetusers.csv", function(d) {
+    d3.csv("/data/internetusers.csv", createChart);
+
+    function createChart(d) {
         var internetUsers = {};
         internetUsers.EastAsiaPacific = []
         for (var i = 0; i < 24; i++) {
@@ -63,9 +66,9 @@
 			.append("svg")
 			.attr("width", width + margin.left + margin.right)
 			.attr("height", (height + margin.top + margin.bottom));
+    }    
         
-        
-    });
+    // });
 </script>
 
 <script>
