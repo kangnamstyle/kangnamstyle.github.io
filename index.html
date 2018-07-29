@@ -18,12 +18,42 @@
 
     d3.csv("/data/internetusers.csv", function(d) {
         var internetUsers = {};
-        console.log(d.length)
         internetUsers.EastAsiaPacific = []
         for (var i = 0; i < 24; i++) {
             var newItem = { year: d[i].year, users: d[i].users }
             internetUsers.EastAsiaPacific.push(newItem)
         }
+        internetUsers.EuropeCentralAsia = []
+        for (var i = 24; i < 48; i++) {
+            var newItem = { year: d[i].year, users: d[i].users }
+            internetUsers.EuropeCentralAsia.push(newItem)
+        }
+        internetUsers.LatinAmericaCaribbean = []
+        for (var i = 48; i < 72; i++) {
+            var newItem = { year: d[i].year, users: d[i].users }
+            internetUsers.LatinAmericaCaribbean.push(newItem)
+        }
+        internetUsers.MiddleEastNorthAfrica = []
+        for (var i = 72; i < 94; i++) {
+            var newItem = { year: d[i].year, users: d[i].users }
+            internetUsers.MiddleEastNorthAfrica.push(newItem)
+        }
+        internetUsers.NorthAmerica = []
+        for (var i = 94; i < 120; i++) {
+            var newItem = { year: d[i].year, users: d[i].users }
+            internetUsers.NorthAmerica.push(newItem)
+        }
+        internetUsers.SouthAsia = []
+        for (var i = 120; i < 144; i++) {
+            var newItem = { year: d[i].year, users: d[i].users }
+            internetUsers.SouthAsia.push(newItem)
+        }
+        internetUsers.SubSaharanAfrica = []
+        for (var i = 144; i < 164; i++) {
+            var newItem = { year: d[i].year, users: d[i].users }
+            internetUsers.SubSaharanAfrica.push(newItem)
+        }
+        
         console.log(internetUsers)
     });
 </script>
