@@ -26,7 +26,7 @@
             var year = d[i].year;
             var users = d[i].users;
 
-            internetUsers[category].append(year, users);
+            internetUsers[category][year] = users
         }
         for (var region in internetUsers) {
             for (var yearkey in region) {
