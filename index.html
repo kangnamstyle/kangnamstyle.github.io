@@ -25,14 +25,14 @@
             }
             var year = d[i].year;
             var users = d[i].users;
-            // map[category][year] = d[i].users;
+            map[category][year] = users;
             console.log(year);
         }
-        // for (var key in map) {
-        //     for (var yearkey in key) {
-        //         console.log(key, yearkey, key[yearkey]);
-        //     }
-        // }
+        for (var key in map) {
+            for (var yearkey in key) {
+                console.log(key, yearkey, key[yearkey]);
+            }
+        }
     });
 </script>
 
