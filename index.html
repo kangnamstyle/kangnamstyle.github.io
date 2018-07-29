@@ -17,7 +17,7 @@
     var height = 405;
 
     d3.csv("/data/internetusers.csv", function(d) {
-        return {
+        for (var i = 0; i < d.length; i++) {
             console.log(d[i].region);
             console.log(d[i].year);
             console.log(d[i].users);
