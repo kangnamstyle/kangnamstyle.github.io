@@ -2,10 +2,99 @@
 <html>
 <head>
 <meta charset="utf-8">
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.20/themes/base/jquery-ui.css" type="text/css" media="all" />
+    <style>
+    #slider2{width: 800px;}
+    .steps-2 {
+    border: 1px solid transparent; /*follows #slider2 style for sizing purposes */
+    width: 800px; 
+    position: relative; 
+    height: 30px;
+    }
+    .tick { 
+        border: 1px solid transparent; /*follows slide handle style for sizing purposes*/
+        position: absolute;
+        width: 1.2em;
+        margin-left: -.6em;
+        text-align:center;
+        left: 0;
+    }
+
+    * {
+  box-sizing: border-box;
+}
+p {
+    font-size: 16px;
+}
+
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 25px;
+  background: #D3D3D3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background: #00FFAB;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background: #00FFAB;
+  cursor: pointer;
+}
+
+.sliderticks {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
+}
+
+.sliderticks p {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  width: 1px;
+  background: #D3D3D3;
+  height: 10px;
+  line-height: 40px;
+  margin: 0 0 20px 0;
+}
+legend {
+    background-color: #000;
+    color: #fff;
+    padding: 3px 6px;
+}
+
+.output {
+    font: 1rem 'Fira Sans', sans-serif;
+}
+
+input {
+    margin: .4rem;
+}
+</style>
+
 <style>
 
 body {
-  font: 12px sans-serif;
+    background: #EEEEEE; color: #333333; font-size: 11px;
 }
 
 .axis path,
@@ -24,12 +113,15 @@ body {
 <body>
    
 <script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="https://rawgit.com/susielu/d3-annotation/master/d3-annotation.min.js"></script>
 
 <div id="chart">
 <h1>
-CS498 - Data visualization: Final Project
+CS498 - Data visualization Final Project - Growth of Internet Users over the Years Worldwide
 </h1>
-
+<p>Over the years, the Internet has grown in popularity worldwide, and has shown a tremendous growth worldwide.
+ The graph below shows the aggreate growth of all major regions worldwide.
+</p>
 </div>
 
 
@@ -281,9 +373,41 @@ d3.csv(fileName, function(error, data) {
 });
 }
 
+function updateTextInput(val) {
+          document.getElementById('textInput').value=val; 
+}
+
+const annotations1 = [
+        {
+          note: {
+            label: "Google was formed",
+            title: "1998: Google happened"
+          },
+          x: 125,
+          y: 450,
+          dy: -150,
+          dx: -25
+        }
+    ],
+    annotations2 = [
+        {
+          note: {
+            label: "Ajax was introduced to web programming",
+            title: "2005: Year of Ajax"
+          },
+          x: 450,
+          y: 350,
+          dy: -125,
+          dx: 100
+        }
+]
+
+
 </script>
 
 <br>
+<p>In the graph below, each region's growth can be tracked by selecting appropriate regions.
+  A couple of events that made significant contributions to fuel the growth can be seen by clicking appropriate years.</p>
 <button onclick="showEuropeCentralAsia()">Europe and Central Asia</button>
 <button onclick="showLatinCarribean()">Latin America and Carribean</button>
 <button onclick="showMiddleEastNorthAfrica()">Middle East and North Africa</button>
@@ -291,6 +415,24 @@ d3.csv(fileName, function(error, data) {
 <button onclick="showSouthAsia()">South Asia</button>
 <button onclick="showSubSaharanAfrica()">Sub-Saharan Africa</button>
 <button onclick="showAllRegions()">All Regions</button>
+<br>
+<fieldset>
+        <legend>Choose Years to See Related Events</legend>
+    
+        <div>
+            <input type="checkbox" id="y1998" name="year"
+                   value="1998" onclick="showAnnotation1(this)" />
+            <label for="Year1998">1998</label>
+        </div>
+    
+        <div>
+            <input type="checkbox" id="y2005" name="year"
+                   value="2005" onclick="showAnnotation2(this)"/>
+            <label for="Year2005">2005</label>
+        </div>
+    </fieldset>
+    
+
 
 <script>
 function InitChart() {
@@ -304,11 +446,49 @@ function InitChart() {
     chartData(svgRef2, '/data/data.csv')
 }
 
+function showAnnotation1(cb) {
+    const makeAnnotations = d3.annotation()
+        .type(d3.annotationLabel)
+        .annotations(annotations1)
+
+    if (cb.checked == true) {
+    d3.select("#area")
+    .append("g")
+    .attr("class", "annotation-group")
+    .call(makeAnnotations)
+    }
+    if (cb.checked == false) {
+        d3.select(".annotation-group").remove()
+    }
+}
+
+function showAnnotation2(cb) {
+    const makeAnnotations = d3.annotation()
+        .type(d3.annotationLabel)
+        .annotations(annotations2)
+    
+        if (cb.checked == true) {
+    d3.select("#area")
+    .append("g")
+    .attr("class", "annotation-group")
+    .call(makeAnnotations)
+    }
+    if (cb.checked == false) {
+        d3.select(".annotation-group").remove()
+    }
+}
+
 InitChart()
+
+function uncheckCheckBoxes() {
+    document.getElementById("y1998").checked = false
+    document.getElementById("y2005").checked = false
+}
+
 
 function showEuropeCentralAsia() {
     d3.select("#area").remove()
-
+    uncheckCheckBoxes()
     var svgRef2 = d3.select('body').append('svg')
     .attr('id', 'area')
     .attr('width', width + margin.left + margin.right)
@@ -321,6 +501,7 @@ function showEuropeCentralAsia() {
 
 function showLatinCarribean() {
     d3.select("#area").remove()
+    uncheckCheckBoxes()
 
     var svgRef2 = d3.select('body').append('svg')
     .attr('id', 'area')
@@ -334,6 +515,7 @@ function showLatinCarribean() {
 
 function showMiddleEastNorthAfrica() {
     d3.select("#area").remove()
+    uncheckCheckBoxes()
 
     var svgRef2 = d3.select('body').append('svg')
     .attr('id', 'area')
@@ -347,6 +529,7 @@ function showMiddleEastNorthAfrica() {
 
 function showNorthAmerica() {
     d3.select("#area").remove()
+    uncheckCheckBoxes()
 
     var svgRef2 = d3.select('body').append('svg')
     .attr('id', 'area')
@@ -360,6 +543,7 @@ function showNorthAmerica() {
 
 function showSouthAsia() {
     d3.select("#area").remove()
+    uncheckCheckBoxes()
 
     var svgRef2 = d3.select('body').append('svg')
     .attr('id', 'area')
@@ -373,6 +557,7 @@ function showSouthAsia() {
 
 function showSubSaharanAfrica() {
     d3.select("#area").remove()
+    uncheckCheckBoxes()
 
     var svgRef2 = d3.select('body').append('svg')
     .attr('id', 'area')
@@ -386,6 +571,7 @@ function showSubSaharanAfrica() {
 
 function showAllRegions() {
     d3.select("#area").remove()
+    uncheckCheckBoxes()
 
     var svgRef2 = d3.select('body').append('svg')
     .attr('id', 'area')
